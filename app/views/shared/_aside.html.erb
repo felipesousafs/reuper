@@ -1,0 +1,40 @@
+<aside class="main-sidebar" >
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MENU PRINCIPAL</li>
+        <% if user_signed_in? %>
+          <li <%= select_menu("rooms") %> >
+            <%= link_to rooms_path do %>
+              <i class='fa fa-bed fa-fw'></i> <span>Quartos</span>
+            <% end %>
+          </li>
+          <li <%= select_menu("courses") %> >
+            <%= link_to courses_path do %>
+              <i class='fa fa-graduation-cap fa-fw'></i> <span>Cursos</span>
+            <% end %>
+          </li>
+          <li <%= select_menu("users") %> >
+            <%= link_to users_path do %>
+                <i class='fa fa-users fa-fw'></i> <span>Residentes</span>
+            <% end %>
+          </li>
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-list fa-fw"></i><span>Outros Cadastros</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+             <li>	<%= link_to '#' %></li>
+             <li>	<%= link_to '#' %></li>
+            </ul>
+          </li>
+        <% end -%>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>

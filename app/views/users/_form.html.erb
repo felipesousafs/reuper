@@ -1,0 +1,36 @@
+<%= simple_form_for user do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <div class="row">
+        <div class="col-md-12">
+      <%= f.input :email, required: true, autofocus: true %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.input :name, required: true, autofocus: true, input_html: { minlength: 10 } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.input :reg_number, required: true, autofocus: true, input_html: { minlength: 8 } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.association :room, label_method: :room ,collection: Room.all, input_html: { class:'chosen-select' }%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.association :course, label_method: :name, collection: Course.all, input_html: { class:'chosen-select' }%>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Salvar" %>
+    </div>
+
+<% end %>

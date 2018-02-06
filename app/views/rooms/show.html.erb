@@ -1,0 +1,62 @@
+<%= content_for :full_box do %>flag<% end %>
+<div class="box box-default">
+  <div class="box-body">
+    <div class="row">
+      <div class="col-md-12">
+        <p>
+          <strong>Number:</strong>
+          <%= @room.number %>
+        </p>
+
+        <p>
+          <strong>Floor:</strong>
+          <%= @room.floor %>
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+<% @users = User.where(room: @room) %>
+<div class="box box-default">
+  <div class="box-body">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-striped table-bordered datatables2">
+          <thead>
+          <h4>Residentes do quarto <strong><%= @room.room %> </strong></h4>
+          <tr>
+            <th>Nome</th>
+            <th>Curso</th>
+            <th>Quarto</th>
+            <th><%=t '.actions', :default => t("helpers.actions") %></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @users.each do |user| %>
+              <tr>
+                <td><%= user.name %></td>
+                <td><%= link_to user.course.name, course_path(user.course.id) %></td>
+                <td><%= link_to user.room.room, room_path(user.room.id) %></td>
+                <td>
+                  <%= link_to user, :class => 'btn btn-primary btn-xs', data: { toggle: 'tooltip', placement: 'top', title: 'Ver perfil completo' } do %>
+                      <i class="fa fa-eye fa-fw"></i>
+                  <% end %>
+                  <% if current_user %>
+                      <% if current_user.has_role? :admin %>
+                          <%= link_to  edit_user_path(user), :class => 'btn btn-warning btn-xs', data: { toggle: 'tooltip', placement: 'top', title: 'Alterar Perfil' } do %>
+                              <i class="fa fa-pencil fa-fw"></i>
+                          <% end %>
+                      <% end %>
+                  <% end %>
+
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

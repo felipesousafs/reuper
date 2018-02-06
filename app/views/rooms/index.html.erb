@@ -1,0 +1,38 @@
+<div class="row">
+  <%= simple_form_for rooms_path, method: "get" do |f| %>
+      <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+        <%= f.input :pesquisa, input_html: {value: params[:pesquisa], name: 'pesquisa', placeholder: "Pesquise por piso ou número", id: "pesquisa"}, label: false  %>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+        <%= f.submit "Pesquisar", class: "btn btn-default btn-block" %>
+      </div>
+  <% end %>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class='text-center'>Number</th>
+      <th class='text-center'>Floor</th>
+      <th class='text-center' width="150px"><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+        <td class='text-center'><%= room.number %></td>
+        <td class='text-center'><%= room.floor %></td>
+        <td class='text-center'>
+          <%= render 'shared/action_links', object: room %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+    <%= will_paginate @room, renderer: BootstrapPagination::Rails , :page_links => true%>
+  </div>
+</div>

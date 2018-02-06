@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>When:</strong>
+  <%= @trash.when %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @trash.user_id %>
+</p>
+
+<p>
+  <strong>Done:</strong>
+  <%= @trash.done %>
+</p>
+
+<%= link_to 'Edit', edit_trash_path(@trash) %> |
+<%= link_to 'Back', trashes_path %>
