@@ -117,7 +117,11 @@ CREATE TABLE calendars (
     inicio_semestre timestamp without time zone,
     fim_semestre timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    trash boolean,
+    food boolean,
+    kitchen boolean,
+    fridge boolean
 );
 
 
@@ -614,6 +618,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180305200718'),
 ('20180308200620'),
 ('20180308202000'),
-('20180312125917');
+('20180312125917'),
+('20180313125614');
 
 

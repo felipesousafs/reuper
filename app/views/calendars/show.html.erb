@@ -4,6 +4,7 @@
       <thead>
       <tr>
         <th>Data</th>
+        <th>Aplica-se às tabelas</th>
         <th>Adicionado em</th>
         <th>Última alteração em</th>
       </tr>
@@ -12,6 +13,11 @@
       <tr>
         <td>
           <%= @calendar.is_holiday ? l(@calendar.date) : ("Período letivo: " + l(@calendar.inicio_semestre).to_s + " - " + l(@calendar.fim_semestre).to_s) %>
+        </td>
+        <td>
+          <% @calendar.tables.each_with_index do |k, i| %>
+              <%= k %><br>
+          <% end %>
         </td>
         <td>
           <%= l(@calendar.created_at, format: :short) %>
