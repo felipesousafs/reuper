@@ -1,0 +1,49 @@
+<%= content_for :full_box do %>opa
+<% end %>
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title"><%= @calendar.is_holiday ? 'Adicionar feriado' : 'Definir Período letivo' %></h3>
+  </div>
+  <div class="box-body">
+    <!-- Date -->
+    <%= simple_form_for(@calendar) do |f| %>
+        <%= f.error_notification %>
+        <% if @calendar.is_holiday %>
+            <div class="form-group col-md-6">
+              <label>Data do feriado:</label>
+              <div class="input-group date">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="form-control pull-right" id="datepicker">
+                <%= f.input :date, id: :date, as: :hidden %>
+                <%= f.input :is_holiday, id: :is_holiday, as: :hidden, value: true %>
+              </div>
+              <!-- /.input group -->
+            </div>
+            <!-- /.form group -->
+        <% else %>
+            <!-- Date range -->
+            <div class="form-group col-md-6">
+              <label>Período letivo:</label>
+
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="form-control pull-right" id="reservation">
+                <%= f.input :inicio_semestre, id: :inicio_semestre, as: :hidden %>
+                <%= f.input :fim_semestre, id: :fim_semestre, as: :hidden %>
+                <%= f.input :is_holiday, id: :is_holiday, as: :hidden, value: false %>
+              </div>
+              <!-- /.input group -->
+            </div>
+        <% end %>
+        <!-- /.form group -->
+        <div class="form-actions col-xs-12">
+          <%= f.button :submit %>
+        </div>
+    <% end %>
+  </div>
+  <!-- /.box-body -->
+</div>

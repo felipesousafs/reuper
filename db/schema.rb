@@ -10,13 +10,109 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180120210900) do
+ActiveRecord::Schema.define(version: 20180305134252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "alimentos", force: :cascade do |t|
+    t.string "ativo"
+    t.integer "codAlimento"
+    t.integer "codAlimentoOrigem"
+    t.string "descricaoOrigem"
+    t.string "tabelaNutricionalOrigem"
+    t.string "descricaoOriginal"
+    t.integer "codUsuario"
+    t.string "descricao"
+    t.string "codUnidade"
+    t.string "observacao"
+    t.integer "codAlimentoGrupo"
+    t.integer "codAlimentoCategoria"
+    t.float "coeficienteNpu"
+    t.string "grupoDescricao"
+    t.string "categoriaDescricao"
+    t.string "marcaDescricao"
+    t.integer "codUnidadeCaseira"
+    t.integer "tabelaNutricional"
+    t.string "unidadeCaseiraDescricao"
+    t.string "unidadeCaseiraDescricaoPlural"
+    t.integer "porcao"
+    t.integer "porcaoQuantidade"
+    t.integer "vrc"
+    t.float "caloriavrc"
+    t.float "energiavrc"
+    t.datetime "dataInclusao"
+    t.datetime "dataAlteracao"
+    t.integer "codRotulo"
+    t.string "guid"
+    t.string "precoCusto"
+    t.string "fatorCorrecao"
+    t.string "dataPrecoCusto"
+    t.string "ingredientes"
+    t.integer "temDiferenca"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.jsonb "nutrientes", default: "{}", null: false
+    t.index ["nutrientes"], name: "index_alimentos_on_nutrientes", using: :gin
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "informacao_nutricionals", force: :cascade do |t|
+    t.float "caloria"
+    t.float "energia"
+    t.float "choQuantidade"
+    t.float "choCaloria"
+    t.float "ptnQuantidade"
+    t.float "ptnCaloria"
+    t.float "gordQuantidade"
+    t.float "gordCaloria"
+    t.float "alcQuantidade"
+    t.float "alcCaloria"
+    t.float "outroscaloria"
+    t.bigint "alimento_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alimento_id"], name: "index_informacao_nutricionals_on_alimento_id"
+  end
+
+  create_table "marcadors", force: :cascade do |t|
+    t.integer "cod_marcador"
+    t.string "classe"
+    t.string "descricao"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "nutrientes", force: :cascade do |t|
+    t.string "descricao"
+    t.string "simbolo"
+    t.string "codUnidade"
+    t.integer "codNutrienteNutriente"
+    t.integer "fatorDefault"
+    t.integer "ordem"
+    t.integer "cor"
+    t.integer "codAlimento"
+    t.integer "codNutriente"
+    t.string "principal"
+    t.integer "fator"
+    t.float "quantidade"
+    t.integer "codNutrienteGrupo"
+    t.string "descricaoGrupo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "alimento_id"
+    t.index ["alimento_id"], name: "index_nutrientes_on_alimento_id"
+  end
+
+  create_table "receita", force: :cascade do |t|
+    t.integer "cod_alimento"
+    t.string "descricao"
+    t.string "ativo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -35,6 +131,14 @@ ActiveRecord::Schema.define(version: 20180120210900) do
   create_table "rooms", force: :cascade do |t|
     t.string "number"
     t.string "floor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "trashes", force: :cascade do |t|
+    t.datetime "when"
+    t.integer "user_id"
+    t.boolean "done"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -68,4 +172,6 @@ ActiveRecord::Schema.define(version: 20180120210900) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "informacao_nutricionals", "alimentos"
+  add_foreign_key "nutrientes", "alimentos"
 end

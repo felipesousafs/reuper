@@ -3,12 +3,13 @@ class UsersController < ApplicationController
   # All Users
   def index
     @users = User.order(:name)
-
-    @users = @users.paginate(:page => params[:page], :per_page => 10)
+    #@users = @users.paginate(:page => params[:page], :per_page => 10)
   end
+
   def show
     @user = User.find(params[:id])
   end
+
   def edit
     @user = User.find(params[:id])
   end

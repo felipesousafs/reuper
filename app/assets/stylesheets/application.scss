@@ -2,87 +2,17 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import 'bootstrap-datetimepicker';
-
 @import "chosen";
 @import "chosen-bootstrap";
-
 @import "font-awesome-sprockets";
 @import "font-awesome";
-
 @import "adminLTE/AdminLTE";
-@import "adminLTE/skins/skin-reuper.min";
+@import "adminLTE/skins/skin-blue";
+@import "dataTables.bootstrap";
+@import "all";
+@import "custom";
+@import "daterangepicker.scss";
 
-.navbar-nav > .user-menu > .dropdown-menu > li.user-header > img {
-  border: none;
-
-}
-.content-wrapper{
-  min-height: 100%;
-}
-
-.linktjpi {
-  font-weight: bold;
-}
-
-.linktjpi > img {
-  width: 35px;
-  margin-top: -8px;
-  margin-left: 4px;
-}
-
-.logotjfooter {
-  width: 25px;
-  margin-top: -6px;
-  margin-left: 4px;
-}
-
-.red {
-  color: #d9534f !important;
-}
-
-.yellow {
-  color: #f0ad4e !important;
-}
-
-.fundo-branco {
-  background: #fff;
-  margin-top: 10px;
-  padding-bottom: 10px;
-}
-
-.todo-list > li .text {
-  display: unset !important;
-  margin-left: 5px;
-  font-weight: 600;
-}
-.box-body {
-  .box-footer{
-    margin: 10px -10px -10px;
-    &.inside{
-      margin: 0px !important;
-    }
-  }
-  .box-header{
-    margin: -10px -10px 20px -10px;
-    &.cocoon{
-      margin: inherit !important;
-    }
-    &.inside{
-      margin: 0px !important;
-    }
-  }
-}
-
-.btn-saldo {
-  margin-top:25px;
-}
-
-.nav-tabs-custom > .nav-tabs > li.active {
-  border-top-color: #08375f !important
-}
-
-.user_sessions{
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-  width: 50%;
-  @include center-block;
-}
+/*
+ *= require_self
+*/

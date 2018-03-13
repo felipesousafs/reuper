@@ -1,11 +1,11 @@
 <%= content_for :full_box do %>flag<% end %>
 
-<div class="box box-default">
+<div class="box box-primary">
 
   <div class="box-body">
     <div class="row">
       <div class="col-md-12">
-        <table class="table table-striped table-bordered datatables2">
+        <table id="datatable" class="table table-striped table-bordered datatables2">
           <thead>
           <tr>
             <th>Nome</th>
@@ -40,10 +40,29 @@
       </div>
     </div>
   </div>
-
-  <div class='row'>
-    <div class='col-lg-12 text-center'>
-      <%= will_paginate @users, :page_links => true, renderer: BootstrapPagination::Rails %>
-    </div>
-  </div>
 </div>
+
+<% #ar = [] %>
+<% #doc = Nokogiri::HTML(open('https://www.dotabuff.com/esports/players')) %>
+  <% #doc.xpath("/html/body/div[1]/div[8]/div[3]/div[1]/div[1]/section/article/div/div/table/tbody/tr/td[2]/a/span").each do |link| %>
+    <% #ar << link.content %>
+  <% #end %>
+
+<%
+  # require 'rest-client'
+  #
+  # headers = {
+  #     'host': "app.dietwin.com.br",
+  #     'user-agent': "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:58.0) Gecko/20100101 Firefox/58.0",
+  #     'accept': "application/json, text/plain, */*",
+  #     'accept-language': "pt-BR,en-US;q=0.7,en;q=0.3",
+  #     'accept-encoding': "gzip, deflate, br",
+  #     'referer': "https://app.dietwin.com.br/ingredientes/1000",
+  #     'authorization': "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjI0QjI1NUIwMkRGOEJGNDZFNTQwMDYwNzIwQkQ1OEYxQTY4OTMzNjQiLCJ0eXAiOiJKV1QifQ.eyJ1bmlxdWVfbmFtZSI6ImVsaWVpZGUiLCJzdWIiOiJzb2FyZXNlbGllaWRlQGdtYWlsLmNvbSIsImNvZFVzdWFyaW8iOiIxMDE5MTE5Iiwicm9sZSI6IlVzdWFyaW8iLCJ0b2tlbl91c2FnZSI6ImlkX3Rva2VuIiwianRpIjoiMWUwYWNkZTItYTNmMC00M2RlLWJhODAtMzhiMTQwYTY2ZDRlIiwiYXVkIjoiZGlldHdpbiIsImF0X2hhc2giOiJuY1A0cE9scy1QZHJZSC1raGp3dXVnIiwiYXpwIjoiZGlldHdpbiIsIm5iZiI6MTUxOTc1NTY5MSwiZXhwIjoxNTE5Nzk4ODkxLCJpYXQiOjE1MTk3NTU2OTEsImlzcyI6Imh0dHBzOi8vYXBwLmRpZXR3aW4uY29tLmJyLyJ9.MF6rtMmgk_OOgIzoByFOXgZd-JFAnASVZLzyLlmEjQMCPKRdvShgd9YRdgxIXeNg2XlMJ1zmT4rZYvtxo8C6YzEl8nSzGVR-fgtfV72PlS_M1S1oychLMfp9peftdHCV4d7tlIm5uCIhYToUvIzSVFvsbgMH8N7_Y6uyxLT1_LFWCUKdpivZ5SMxj8GyGAB94KiStg1zY7bnwjIArPza8em9VXE01TR-AkjLaIs9MziF3-We_VpyxA9IMUWGW3sr6IGXDFmzJYvavNdRb0xuxsd_1DY9U7e1C7cOJq5IjQ0JBFwZuH4rAnJhoRdxco5w5ZFfwnJaDXNg9gA3UCWY3BDIKFvR8PcmI9NBv5i9S7rIobkKIbuqbWy-kVSN1q8cyYi12JWmfimec4K57ZJmg8htEajAaafKAp87T81i9EiVgHVV0apzMquQjREMw48Box3-wObCbXJwZ-VJy6s_dGojLPEcnyeypN6_BFtC_cAUk5tyLbaaBwTtx7CuSFCxNZQ2FZ19r40BIEDCu-KwBx0DHMUJFp5xBrQPJqsju-sT0m6B6M_K3JAEqzRBkgUn_h6nA8zjNI_wb0DoV3TyCkQu19o0NtbfeRMc_amAbCd3ds7sKntCnApChF63V7iF_Tts1IFHvrqik-sv61tHW502D_AWHrb3KtWUOqkwJUw",
+  #     'cookie': "_ga=GA1.3.2126728987.1519429917; __zlcmid=l7h92ZyYtUOd5v; __trf.src=encoded_eyJmaXJzdF9zZXNzaW9uIjp7InZhbHVlIjoiaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS5ici8iLCJleHRyYV9wYXJhbXMiOnt9fSwiY3VycmVudF9zZXNzaW9uIjp7InZhbHVlIjoiKG5vbmUpIiwiZXh0cmFfcGFyYW1zIjp7fX0sImNyZWF0ZWRfYXQiOjE1MTk0Nzk2NjU3OTZ9; rdtrk=%7B%22id%22%3A%224008a02e-0b6a-4756-8c58-69e816741f96%22%7D; _gid=GA1.3.45831748.1519755682",
+  #     'connection': "keep-alive",
+  #     'cache-control': "no-cache",
+  #     'postman-token': "5143f980-ed43-688b-cad6-57b7f21d753a"
+  # }
+
+%>

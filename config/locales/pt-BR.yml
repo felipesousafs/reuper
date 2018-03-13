@@ -129,9 +129,9 @@ pt-BR:
     select:
       prompt: Por favor selecione
     submit:
-      create: Gerar %{model}
-      submit: Salvar %{model}
-      update: Atualizar %{model}
+      create: Salvar
+      submit: Confirmar
+      update: Confirmar atualização
   number:
     currency:
       format:
@@ -209,3 +209,8 @@ pt-BR:
   activerecord:
     errors:
       <<: *errors
+      models:
+        alimento:
+          attributes:
+            receitum:
+              <<: *errors

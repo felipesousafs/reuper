@@ -23,14 +23,22 @@
 
           <li class="treeview">
             <a href="#">
-              <i class="fa fa-list fa-fw"></i><span>Outros Cadastros</span>
+              <i class="fa fa-list fa-fw"></i><span>Tabelas</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
-             <li>	<%= link_to '#' %></li>
-             <li>	<%= link_to '#' %></li>
+              <li <%= select_menu("trashes") %> >
+                <%= link_to trashes_path do %>
+                    <i class='fa fa-trash fa-fw'></i> <span>Tabela de lixo</span>
+                <% end %>
+              </li>
+              <li <%= select_menu("calendars") %> >
+                <%= link_to calendars_path do %>
+                    <i class='fa fa-calendar fa-fw'></i> <span>Calendário</span>
+                <% end %>
+              </li>
             </ul>
           </li>
         <% end -%>

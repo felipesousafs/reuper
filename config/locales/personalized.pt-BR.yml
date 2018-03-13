@@ -2,31 +2,9 @@
 pt-BR:
   activerecord:
     models: &MODELS
-      bidding: Ata de registro de preços
       role: Permissão
       user: Usuário
-      lot: Lote
-      item: Item
-      bidding_genre: Modalidade
-      bidding_kind: Tipo
-      company: Beneficiário
-      company_contact: Contato
-      model_document: Modelo de documento
-      model_document_category: Categoria de documento
-      money_source: Fonte pagadora
-      demand: Liberação
-      demand_item: Item
-      requester: Solicitante
-      requester_contact: Contato do Solicitante
-      licitacao: Licitação
-      situacao: Situação
-      status_licitacao: Status da(s) licitação
-      integrante_cpl: Integrantes da Cpl
-      tipo_edital: Tipo de Edital
-      comissao: Comissão
-      historico: Histórico
-      allocation: dotação
-      direct_contracting: Contratação direta
+      calendar: Periodo letivo e feriados
     attributes:
       name_and_description: &BASIC
         <<: *MODELS
@@ -34,27 +12,6 @@ pt-BR:
         description: Descrição
         created_at: Criação
         updated_at: Atualização
-      bidding: &BIDDING
-        <<: *BASIC
-        abstract: Objeto
-        client: Cliente
-        genre: Modalidade
-        situation: Situação
-        process: Vinculação SEI
-        process_generated: Processo Gerador
-        other_process: Outros Processos
-        number: Número da Ata
-        company: Beneficiário vencedor
-        kind: Tipo
-        lot: Lote
-        bidding_real_value: Total previsto
-        bidding_estimated_value: Total estimado
-        bidding_real_value_text: Total previsto da ata
-        bidding_estimated_value_text: Total estimado
-        document: Documento
-        publication: Data de Publicação
-        name: Nome
-        external_limit_quantity: Limite para adesões externas (quantidade de vezes)
       role: &ROLE
         <<: *BASIC
       user: &USER
@@ -72,162 +29,12 @@ pt-BR:
         current_sign_in_ip: IP logado atualmente
         last_sign_in_ip: Último IP logado
         role: Permissão
-      lot: &LOT
-        <<: *BASIC
-        number: Número do Lote
-        abstract: Resumo do Lote
-        trated_value: Total previsto para contrato
-        trated_value_text: Total previsto para contrato
-        lot_real_value: Total calculado
-        lot_real_value_text: Total calculado
-        lot_estimated_value: Total estimado
-        lot_estimated_value_text: Total estimado
-      licitacao: &LICITACAO
-        <<: *BASIC
-        companies: Beneficiários
-        company: Beneficiário
-        processo_numero: Número do Processo
-        data_abre_proposta: Data de abertura das propostas
-        data_limite_proposta: Data limite da proposta
-        data_inicio_proposta: Data de início da proposta
-        data_realizacao: Data da realização
-        data_publicacao: Data da publicação
-        numero: Número da licitação
-        numero_externo: Número externo
-        objetivo: Objeto da licitação
-        provedor_sistema: Provedor
-        is_direct_contract: Contratação direta
-
-      allocation: &ALLOCATION
-        <<: *BASIC
-        desc: Descrição
-        value: Valor
-
-      pregoeiro: &PREGOEIRO
-        <<: *BASIC
-        name: Nome do pregoeiro
-      integrante_cpl: &INTEGRANTECPL
-        <<: *BASIC
-        matricula: Matrícula
-      natureza_objeto: &NATUREZAOBJETO
-        <<: *BASIC
-        desc: Descrição
-      situacao: &SITUACAO
-        <<: *BASIC
-        desc: Descrição
-      status_licitacao: &STATUSLICITACAO
-        <<: *BASIC
-        descricao: Descrição
-      tipo_edital: &TIPOEDITAL
-        <<: *BASIC
-        desc: Descrição
-      tipo_anexo: &TIPOANEXO
-        <<: *BASIC
-        desc: Descrição
-      item: &ITEM
-        <<: *BASIC
-        product: Objeto/Marca
-        item_real_value: Valor Unitário
-        item_real_value_text: Valor Unitário
-        item_estimated_value: Valor total previsto
-        item_estimated_value_text: Valor total previsto
-        unity: Unidade
-        quantity: Quantidade Registrada
-        demanded: Quantidade Requerida
-        liberated: Quantidade Liberada
-        available: Saldo
-      bidding_genre: &BIDDINGGENRE
-        <<: *BASIC
-      bidding_kind: &BIDDINGKIND
-        <<: *BASIC
-      company: &COMPANY
-        <<: *BASIC
-        name: Beneficiário
-        contact_name: Contato
-        cnpj: CNPJ
-        address: Endereço
-        contact_email: E-mail de Contato
-        contact_phone: Telefone de Contato
-        contact_cpf: CPF do Contato
-        contact_rg: RG do Contato
-        bank_data: Dados Bancários
-      company_contact: &COMPANYCONTACT
-        <<: *BASIC
-        name: Nome/Responsável
-        email: E-mail do contato
-        phone: Telefone do contato
-        cpf: CPF do contato
-        rg: RG do contato
-      model_document: &MODELDOCUMENT
-        <<: *BASIC
-        content: Conteúdo
-      model_document_category: &MODELDOCUMENTCATEGORY
-        <<: *BASIC
-      money_source: &MONEYSOURCE
-        <<: *BASIC
-        acronym: Sigla
-        address: Endereço
-      demand: &DEMAND
-        <<: *BASIC
-        number: Nº da Liberação
-        memo: Expediente Motivador
-        sei_process: Nº SEI
-        part: Unidade Requisitante
-        responsible: Responsável
-        content: Conteúdo
-        document: Documento
-        document_kind: Tipo de Documento
-        items: Ítens
-        liberation: Liberação
-        liberation_model_document: Modelo de documento
-        instance: Instância
-        requester_id: Solicitante
-      demand_bidding: &DEMANDBIDDING
-        <<: *BASIC
-        degree: Grau
-      demand_item: &DEMANDITEM
-        <<: *BASIC
-        quantity: Quantidade Requerida
-        liberated_quantity: Quantidade Liberada
-        bidding_number: Ata
-        lot_number: Lote
-      requester: &REQUESTER
-        <<: *BASIC
-        name: Solicitante
-        cnpj: CNPJ
-        address: Endereço
-        extern: Tipo
-      requester_contact: &REQUESTERCONTACT
-        <<: *BASIC
-        name: Nome do contato
-        email: E-mail do contato
-        phone: Telefone do contato
-        cpf: CPF do contato
-        rg: RG do contato
-      comissao: &COMISSAO
-        integrante_cpl: Integrantes
-      historico: &HISTORICO
-        <<: *BASIC
-        data_hist: Data
-        observ: Observação
     errors:
       models:
         bidding:
           attributes:
             company:
               required: Selecione um Beneficiário
-            company_contact:
-              required: Selecione um Contato
-        demand:
-          attributes:
-            requester:
-              required: Selecione um Solicitante
-            requester_contact:
-              required: Selecione um Contato do Solicitante
-        demand_bidding:
-          attributes:
-            bidding:
-              required: Selecione uma Ata
   #Human Readable view "Logs"
   logs:
     index:
@@ -239,49 +46,6 @@ pt-BR:
       bidding: Ata de registro de preços
       role: Permissão
       user: Usuário
-      lot: Lote
-      item: Item
-      biddinggenre: Modalidade
-      biddingkind: Tipo
-      company: Beneficiário
-      companycontact: Contato
-      modeldocument: Modelo de documento
-      modeldocumentcategory: Categoria de documento
-      moneysource: Fonte pagadora
-      demand: Liberação
-      demanditem: Item
-      requester: Solicitante
-      requestercontact: Contato do Solicitante
-      licitacao: Licitação
-      situacao: Situação
-      statuslicitacao: Status da(s) licitação
-      integrantecpl: Integrantes da Cpl
-      tipoedital: Tipo de Edital
-      comissao: Comissão
-      historico: Histórico
 
-
-      <<: *ITEM
-      <<: *COMPANY
-      <<: *BIDDING
-      <<: *ROLE
       <<: *ROLE
       <<: *USER
-      <<: *BIDDINGGENRE
-      <<: *BIDDINGKIND
-      <<: *COMPANYCONTACT
-      <<: *MODELDOCUMENT
-      <<: *MODELDOCUMENTCATEGORY
-      <<: *MONEYSOURCE
-      <<: *DEMAND
-      <<: *DEMANDITEM
-      <<: *REQUESTER
-      <<: *REQUESTERCONTACT
-      <<: *LICITACAO
-      <<: *SITUACAO
-      <<: *STATUSLICITACAO
-      <<: *INTEGRANTECPL
-      <<: *TIPOEDITAL
-      <<: *COMISSAO
-      <<: *HISTORICO
-      <<: *ALLOCATION

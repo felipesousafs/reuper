@@ -1,32 +1,49 @@
-<% unless controller_name == "registrations" or controller_name == "sessions" or controller_name == "logs"%>
-  <% value = "helpers.titles.#{action_name}" %>
-  <h1>
-    <% if action_name == "index" %>
-      <i class="fa fa-fw fa-list"></i>
-    <% elsif action_name == "show" %>
-      <i class="fa fa-fw fa-eye"></i>
-    <% elsif action_name == "new" %>
-      <i class="fa fa-fw fa-edit"></i>
-    <% elsif action_name == "edit" %>
-      <i class="fa fa-fw fa-pencil"></i>
-    <% else %>
-      <i class="fa fa-fw fa-question-circle"></i>
-    <% end -%>
+<% unless controller_name == "registrations" or controller_name == "sessions" %>
+    <% value = "helpers.titles.#{action_name}" %>
+    <% periodo_letivo = Calendar.where(is_holiday: false).last %>
+    <h1>
+      <% if action_name == "index" %>
+          <i class="fa fa-fw fa-list"></i>
+      <% elsif action_name == "show" %>
+          <i class="fa fa-fw fa-eye"></i>
+      <% elsif action_name == "new" %>
+          <i class="fa fa-fw fa-edit"></i>
+      <% elsif action_name == "edit" %>
+          <i class="fa fa-fw fa-pencil"></i>
+      <% else %>
+          <i class="fa fa-fw fa-question-circle"></i>
+      <% end -%>
 
 
-    <%=t value %>
-    <% if action_name == "index" %>
-      <%=t 'of' %> <%= Kernel.const_get(controller_name.singularize.camelize).model_name.human.downcase.pluralize %>
-    <% else %>
-      <%= Kernel.const_get(controller_name.singularize.camelize).model_name.human.downcase %>
-    <% end -%>
-    <small><%= Kernel.const_get(controller_name.singularize.camelize).model_name.human.pluralize %></small>
-    <% if can? :new, controller_name.singularize %>
-      <% unless action_name == 'new' || controller_name == 'users' %>
-          <%= link_to "#{controller_name}/new", class: "btn btn-primary btn-xs" do %>
-              <%= t('.new', default: t("helpers.links.new")) %> <%= Kernel.const_get(controller_name.singularize.camelize).model_name.human %> <i class='fa fa-plus'></i>
-        <% end %>
+      <%= t value %>
+      <% if action_name == "index" %>
+          <%= t 'of' %> <%= Kernel.const_get(controller_name.singularize.camelize).model_name.human.downcase.pluralize %>
+      <% else %>
+          <%= Kernel.const_get(controller_name.singularize.camelize).model_name.human.downcase %>
+      <% end -%>
+      <% unless controller_name == 'calendars' %>
+          <%= Kernel.const_get(controller_name.singularize.camelize).model_name.human.pluralize %></small>
+      <% else %>
+          <small class="label-default label">
+            <i class="fa fa-calendar fa-fw"></i>
+            <% if periodo_letivo %>
+                Período letivo: <%= l(periodo_letivo.inicio_semestre) %> - <%= l(periodo_letivo.fim_semestre) %>
+            <% else %>
+                <% if current_user %>
+                    <% if current_user.has_role? :admin %>
+                        <%= link_to 'Definir período letivo', new_calendar_path(is_holiday: false), class: 'btn-flat' %>
+                    <% end %>
+                <% end %>
+            <% end %>
+          </small>
       <% end %>
-    <% end %>
-  </h1>
+      <% if can? :new, controller_name.singularize %>
+          <% unless action_name == 'new' || controller_name == 'users' || controller_name == 'calendars' %>
+              <%= link_to "#{controller_name}/new", class: "btn btn-primary btn-xs" do %>
+                  <%= t('.new', default: t("helpers.links.new")) %> <%= Kernel.const_get(controller_name.singularize.camelize).model_name.human %>
+                  <i class='fa fa-plus'></i>
+              <% end %>
+          <% end %>
+      <% end %>
+    </h1>
 <% end -%>

@@ -84,3 +84,9 @@ gem 'will_paginate-bootstrap'
 gem 'breadcrumbs_on_rails'
 
 gem 'font-awesome-sass'
+
+#temporary (get html content)
+require 'nokogiri'
+require 'open-uri'
+
+gem 'rest-client', '~> 2.0', '>= 2.0.2'

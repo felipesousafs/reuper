@@ -26,15 +26,47 @@
 //= require moment/pt-br
 //= require bootstrap-datetimepicker
 //= require adminLTE/adminlte
+//= require jquery.dataTables
+//= require Chart.min
+//= require icheck
+//= require daterangepicker
 
 //= require_tree .
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     $('.chosen-select').chosen({
         allow_single_deselect: true,
         no_results_text: 'Nenhum resultado encontrado',
         width: '100%'
+    });
+
+    $('#datatable').dataTable({
+        sPaginationType: "full_numbers",
+        bJQueryUI: false,
+        bProcessing: true
+    });
+
+    //Date picker
+    $('#datepicker').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true
+        },
+        function(start, end, label) {
+            //var years = moment().diff(start, 'years');
+            //alert(start.format('DD-MM-YYYY'));
+            $('#calendar_date').val(start.format('DD-MM-YYYY'));
+        });
+    //Date range picker
+    $('#reservation').daterangepicker({
+        locale: {
+            format: 'DD-MM-YYYY'
+        }
+    },
+    function (start, end, label) {
+        //alert("A new date range was chosen: " + start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY'));
+        $('#calendar_inicio_semestre').val(start.format('DD-MM-YYYY'));
+        $('#calendar_fim_semestre').val(end.format('DD-MM-YYYY'));
     });
 
 });
