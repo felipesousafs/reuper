@@ -70,6 +70,6 @@ class CalendarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def calendar_params
-      params.require(:calendar).permit(:is_holiday, :date, :inicio_semestre, :fim_semestre)
+      params.require(:calendar).permit(:is_holiday, :date, :inicio_semestre, :fim_semestre, :trash, :food, :fridge, :kitchen)
     end
 end

@@ -11,6 +11,7 @@ module BootstrapFlashHelper
       type = :success if type == :notice
       type = :danger  if type == :alert
       type = :danger  if type == :error
+      type = :warning  if type == :warning
       next unless ALERT_TYPES.include?(type)
 
       tag_class = options.extract!(:class)[:class]

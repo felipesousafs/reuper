@@ -1,0 +1,59 @@
+<!--
+REMEMBER!
+
+-- javascript para substituir conteudo da div que contém a tabela
+    * Ao clicar numa notificação, os detalhes devem ser abertos no lugar da tabela.
+    * Ao clicar no menu do lado, deve mostrar novamente a tabela.
+ -->
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">Notificações</h3>
+    <!-- /.box-tools -->
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <div class="table-responsive mailbox-messages">
+      <table id="table-notifications" class="table table-hover table-bordered">
+        <thead>
+        <tr>
+          <th class="col-md-1">Selecionar</th>
+          <th>Remetente</th>
+          <th>Assunto</th>
+          <th>Tabela</th>
+          <th>Ação</th>
+        </tr>
+        </thead>
+        <% @array = []
+           @contador = 0
+        %>
+        <tbody>
+        <% @notifications.each_with_index do |notification, i| %>
+            <% if notification.read %>
+                <tr class="notification_read">
+            <% else %>
+                <tr>
+            <% end %>
+            <td style="padding-left: 3%;"><input type="checkbox" class="minimal" id="cb_notification"></td>
+            <td><%= notification.sender.name %></td>
+            <td><%= link_to notification.subject, notification, remote: true %></td>
+            <td><%= t('activerecord.models.'+notification.table_type) %></td>
+            <td><%= link_to 'Ver detalhes', notification %>&nbsp;
+              <%= link_to 'Apagar', notification, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+            </tr>
+            <%= hidden_field_tag(('notification_id'), notification.id) %>
+
+            <%
+              @contador = @contador + 1
+            %>
+        <% end %>
+        <%= hidden_field_tag(:pub_trash_input, "") %>
+        <% @array = @array.to_json %>
+        </tbody>
+      </table>
+      <!-- /.table -->
+    </div>
+    <!-- /.mail-box-messages -->
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /. box -->

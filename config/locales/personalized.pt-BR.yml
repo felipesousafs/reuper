@@ -5,6 +5,8 @@ pt-BR:
       role: Permissão
       user: Usuário
       calendar: Periodo letivo e feriados
+      notification: Notificações
+      trash: Tabela de retirada do lixo
     attributes:
       name_and_description: &BASIC
         <<: *MODELS
@@ -14,6 +16,12 @@ pt-BR:
         updated_at: Atualização
       role: &ROLE
         <<: *BASIC
+      calendar:
+        <<: *BASIC
+        trash: Retirada do lixo
+        food: Alimentação
+        kitchen: Limpeza da cozinha
+        fridge: Limpeza da geladeira
       user: &USER
         <<: *BASIC
         username: Usuário
@@ -29,6 +37,12 @@ pt-BR:
         current_sign_in_ip: IP logado atualmente
         last_sign_in_ip: Último IP logado
         role: Permissão
+      notification:
+        <<: *BASIC
+        count:
+          zero: Você não possui novas notificações
+          one: Você possui 1 notificação não lida
+          other: Você possui %{count} notificações não lidas
     errors:
       models:
         bidding:

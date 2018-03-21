@@ -94,3 +94,30 @@
   width: 50%;
   @include center-block;
 }
+table.dataTable thead th.sorting:after {
+  /*content: "\f0dc";*/
+  content: "\f0dc";
+  color: #adadad;
+  font-size: 0.9em;
+  padding-top: 0.12em;
+}
+table.dataTable thead th.sorting_asc:after {
+  content: "\f0de";
+  font-size: 0.9em;
+}
+table.dataTable thead th.sorting_desc:after {
+  content: "\f0dd";
+  font-size: 0.9em;
+}
+table.dataTable thead th.sorting_asc,
+table.dataTable thead th.sorting_asc {
+  background-color: #ededed;
+}
+//table.dataTable tbody td.sorting_1,
+//table.dataTable tbody td.sorting_2,
+//table.dataTable tbody td.sorting_desc {
+//  background-color: transparent !important;
+//}
+#datatable-trashes tbody{
+  cursor: pointer;
+}

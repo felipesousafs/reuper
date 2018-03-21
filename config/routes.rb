@@ -10,12 +10,22 @@ Rails.application.routes.draw do
       registrations: 'users/registrations'
   }
   get 'users', to: 'users#index', as: 'users'
+  post 'pub_trash', to: 'trashes#pub_trash', as: 'pub_trash'
+  get 'pub_trash', to: 'trashes#pub_trash', as: 'published_trash'
   # get 'user/:id', to: 'users#show', as: 'user'
   # get 'user/edit/:id', to: 'users#edit', as: 'user_edit'
 
   resources :user, :controller => "users"
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'users#index'
+  # Home pages
+  get 'home/tarefas', to: 'home#tarefas'
+
+  # Swap tasks
+
+  get '/trashes/swap/:id', to: 'trashes#swap_trash', as: 'swap_trash' # Swap trash
+  get '/notifications/:id', to: 'notifications#show', as: 'notification'
+  get '/notifications', to: 'notifications#index', as: 'notifications'
+  get 'notifications/new', to: 'notifications#new', as: 'new_notification'
 end

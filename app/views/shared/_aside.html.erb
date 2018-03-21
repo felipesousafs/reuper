@@ -1,18 +1,23 @@
-<aside class="main-sidebar" >
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MENU PRINCIPAL</li>
-        <% if user_signed_in? %>
+<aside class="main-sidebar">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu" data-widget="tree">
+      <li class="header">MENU PRINCIPAL</li>
+      <% if user_signed_in? %>
+          <li <%= select_menu("home", "tarefas") %> >
+            <%= link_to home_tarefas_path do %>
+                <i class='fa fa-calendar fa-fw'></i> <span>Calendário de tarefas</span>
+            <% end %>
+          </li>
           <li <%= select_menu("rooms") %> >
             <%= link_to rooms_path do %>
-              <i class='fa fa-bed fa-fw'></i> <span>Quartos</span>
+                <i class='fa fa-bed fa-fw'></i> <span>Quartos</span>
             <% end %>
           </li>
           <li <%= select_menu("courses") %> >
             <%= link_to courses_path do %>
-              <i class='fa fa-graduation-cap fa-fw'></i> <span>Cursos</span>
+                <i class='fa fa-graduation-cap fa-fw'></i> <span>Cursos</span>
             <% end %>
           </li>
           <li <%= select_menu("users") %> >
@@ -41,8 +46,8 @@
               </li>
             </ul>
           </li>
-        <% end -%>
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+      <% end -%>
+    </ul>
+  </section>
+  <!-- /.sidebar -->
+</aside>

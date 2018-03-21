@@ -1,4 +1,4 @@
-<% unless controller_name == "registrations" or controller_name == "sessions" %>
+<% unless controller_name == "registrations" or controller_name == "sessions" or controller_name == "notifications" %>
     <% value = "helpers.titles.#{action_name}" %>
     <% periodo_letivo = Calendar.where(is_holiday: false).last %>
     <h1>

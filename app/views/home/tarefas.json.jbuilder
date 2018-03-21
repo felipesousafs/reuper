@@ -1,0 +1,1 @@
+json.array! @trashes, partial: 'home/trash', as: :trash

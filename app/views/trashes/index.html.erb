@@ -1,31 +1,44 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Trashes</h1>
 
-<table>
+<table id="datatable-trashes" class="table table-hover table-bordered">
   <thead>
-    <tr>
-      <th>When</th>
-      <th>User</th>
-      <th>Done</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th class="col-md-1">Selecionar</th>
+    <th>When</th>
+    <th>User</th>
+    <th>Done</th>
+    <th>Actions</th>
+  </tr>
   </thead>
-
+  <% @array = []
+     @contador = 0
+  %>
   <tbody>
-    <% @trashes.each do |trash| %>
-      <tr>
-        <td><%= trash.when %></td>
-        <td><%= trash.user_id %></td>
+  <% @trashes.each_with_index do |trash, i| %>
+      <% if trash.done %>
+        <tr class="info">
+      <% else %>
+        <tr>
+      <% end %>
+        <td><%= hidden_field_tag(('trash_id'), trash.id) %></td>
+        <td><%= l(trash.when) %></td>
+        <td><%= trash.user.name %></td>
         <td><%= trash.done %></td>
-        <td><%= link_to 'Show', trash %></td>
-        <td><%= link_to 'Edit', edit_trash_path(trash) %></td>
-        <td><%= link_to 'Destroy', trash, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', trash %>&nbsp;
+          <%= link_to 'Edit', edit_trash_path(trash) %>&nbsp;
+          <%= link_to 'Destroy', trash, method: :delete, data: {confirm: 'Are you sure?'} %></td>
       </tr>
-    <% end %>
+
+      <%
+        @contador = @contador + 1
+      %>
+  <% end %>
+  <%= hidden_field_tag(:pub_trash_input, "") %>
+  <% @array = @array.to_json %>
   </tbody>
 </table>
-
 <br>
 
+<%= button_to 'Publicar tabela selecionada', {controller: 'trashes', action: 'pub_trash'}, id: :pub_trash_btn, class: 'btn btn-success', data: { prompt: 'Tem certeza que deseja publicar as tuplas selecionadas?' } %>
+<br>
 <%= link_to 'New Trash', new_trash_path %>

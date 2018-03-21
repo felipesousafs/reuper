@@ -1,0 +1,25 @@
+<% me = current_user %>
+<li class="header"><strong><%= t('activerecord.attributes.notification.count', count: me.notifications.count) %></strong></li>
+<li>
+  <!-- inner menu: contains the actual data -->
+  <ul class="menu">
+    <% me.notifications.each do |notification| %>
+        <li>
+          <a href="<%= notification_path(notification) %>">
+            <i class="fa fa-<%=notification.table_type %> text-yellow"></i> <%= notification.subject %>
+          </a>
+        </li>
+    <% end %>
+    <!--<li>-->
+      <!--<a href="#">-->
+        <!--<i class="fa fa-users text-red"></i> Fulano recusou sua solicitação de troca-->
+      <!--</a>-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<a href="#">-->
+        <!--<i class="fa fa-shopping-cart text-green"></i> 25 sales made-->
+      <!--</a>-->
+    <!--</li>-->
+  </ul>
+</li>
+<li class="footer"><a href="<%= notifications_path %>">Ver todas as notificações</a></li>

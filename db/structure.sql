@@ -2,6 +2,7 @@ SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
@@ -20,8 +21,6 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
-SET search_path = public, pg_catalog;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -30,7 +29,7 @@ SET default_with_oids = false;
 -- Name: alimentos; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE alimentos (
+CREATE TABLE public.alimentos (
     id bigint NOT NULL,
     ativo character varying,
     codalimento integer,
@@ -79,7 +78,7 @@ CREATE TABLE alimentos (
 -- Name: alimentos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE alimentos_id_seq
+CREATE SEQUENCE public.alimentos_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -91,14 +90,14 @@ CREATE SEQUENCE alimentos_id_seq
 -- Name: alimentos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE alimentos_id_seq OWNED BY alimentos.id;
+ALTER SEQUENCE public.alimentos_id_seq OWNED BY public.alimentos.id;
 
 
 --
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE ar_internal_metadata (
+CREATE TABLE public.ar_internal_metadata (
     key character varying NOT NULL,
     value character varying,
     created_at timestamp without time zone NOT NULL,
@@ -110,7 +109,7 @@ CREATE TABLE ar_internal_metadata (
 -- Name: calendars; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE calendars (
+CREATE TABLE public.calendars (
     id bigint NOT NULL,
     is_holiday boolean,
     date timestamp without time zone,
@@ -129,7 +128,7 @@ CREATE TABLE calendars (
 -- Name: calendars_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE calendars_id_seq
+CREATE SEQUENCE public.calendars_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -141,14 +140,14 @@ CREATE SEQUENCE calendars_id_seq
 -- Name: calendars_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE calendars_id_seq OWNED BY calendars.id;
+ALTER SEQUENCE public.calendars_id_seq OWNED BY public.calendars.id;
 
 
 --
 -- Name: courses; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE courses (
+CREATE TABLE public.courses (
     id bigint NOT NULL,
     name character varying,
     created_at timestamp without time zone NOT NULL,
@@ -160,7 +159,7 @@ CREATE TABLE courses (
 -- Name: courses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE courses_id_seq
+CREATE SEQUENCE public.courses_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -172,14 +171,52 @@ CREATE SEQUENCE courses_id_seq
 -- Name: courses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE courses_id_seq OWNED BY courses.id;
+ALTER SEQUENCE public.courses_id_seq OWNED BY public.courses.id;
+
+
+--
+-- Name: notifications; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.notifications (
+    id bigint NOT NULL,
+    "from" integer,
+    task_type character varying,
+    task_id integer,
+    user_id integer,
+    read boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    subject character varying,
+    table_type character varying,
+    description character varying
+);
+
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.notifications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.notifications_id_seq OWNED BY public.notifications.id;
 
 
 --
 -- Name: receitas; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE receitas (
+CREATE TABLE public.receitas (
     id bigint NOT NULL,
     cod_alimento integer,
     descricao character varying,
@@ -193,7 +230,7 @@ CREATE TABLE receitas (
 -- Name: receitas_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE receitas_id_seq
+CREATE SEQUENCE public.receitas_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -205,14 +242,14 @@ CREATE SEQUENCE receitas_id_seq
 -- Name: receitas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE receitas_id_seq OWNED BY receitas.id;
+ALTER SEQUENCE public.receitas_id_seq OWNED BY public.receitas.id;
 
 
 --
 -- Name: roles; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE roles (
+CREATE TABLE public.roles (
     id bigint NOT NULL,
     name character varying,
     resource_type character varying,
@@ -226,7 +263,7 @@ CREATE TABLE roles (
 -- Name: roles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE roles_id_seq
+CREATE SEQUENCE public.roles_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -238,14 +275,14 @@ CREATE SEQUENCE roles_id_seq
 -- Name: roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE roles_id_seq OWNED BY roles.id;
+ALTER SEQUENCE public.roles_id_seq OWNED BY public.roles.id;
 
 
 --
 -- Name: rooms; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE rooms (
+CREATE TABLE public.rooms (
     id bigint NOT NULL,
     number character varying,
     floor character varying,
@@ -258,7 +295,7 @@ CREATE TABLE rooms (
 -- Name: rooms_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE rooms_id_seq
+CREATE SEQUENCE public.rooms_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -270,14 +307,14 @@ CREATE SEQUENCE rooms_id_seq
 -- Name: rooms_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE rooms_id_seq OWNED BY rooms.id;
+ALTER SEQUENCE public.rooms_id_seq OWNED BY public.rooms.id;
 
 
 --
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE schema_migrations (
+CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
 );
 
@@ -286,7 +323,7 @@ CREATE TABLE schema_migrations (
 -- Name: trashes; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE trashes (
+CREATE TABLE public.trashes (
     id bigint NOT NULL,
     "when" timestamp without time zone,
     user_id integer,
@@ -300,7 +337,7 @@ CREATE TABLE trashes (
 -- Name: trashes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE trashes_id_seq
+CREATE SEQUENCE public.trashes_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -312,14 +349,14 @@ CREATE SEQUENCE trashes_id_seq
 -- Name: trashes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE trashes_id_seq OWNED BY trashes.id;
+ALTER SEQUENCE public.trashes_id_seq OWNED BY public.trashes.id;
 
 
 --
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE users (
+CREATE TABLE public.users (
     id bigint NOT NULL,
     email character varying DEFAULT ''::character varying NOT NULL,
     encrypted_password character varying DEFAULT ''::character varying NOT NULL,
@@ -344,7 +381,7 @@ CREATE TABLE users (
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE users_id_seq
+CREATE SEQUENCE public.users_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -356,14 +393,14 @@ CREATE SEQUENCE users_id_seq
 -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE users_id_seq OWNED BY users.id;
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
 -- Name: users_roles; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE users_roles (
+CREATE TABLE public.users_roles (
     user_id bigint,
     role_id bigint
 );
@@ -373,63 +410,70 @@ CREATE TABLE users_roles (
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY alimentos ALTER COLUMN id SET DEFAULT nextval('alimentos_id_seq'::regclass);
+ALTER TABLE ONLY public.alimentos ALTER COLUMN id SET DEFAULT nextval('public.alimentos_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY calendars ALTER COLUMN id SET DEFAULT nextval('calendars_id_seq'::regclass);
+ALTER TABLE ONLY public.calendars ALTER COLUMN id SET DEFAULT nextval('public.calendars_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY courses ALTER COLUMN id SET DEFAULT nextval('courses_id_seq'::regclass);
+ALTER TABLE ONLY public.courses ALTER COLUMN id SET DEFAULT nextval('public.courses_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY receitas ALTER COLUMN id SET DEFAULT nextval('receitas_id_seq'::regclass);
+ALTER TABLE ONLY public.notifications ALTER COLUMN id SET DEFAULT nextval('public.notifications_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regclass);
+ALTER TABLE ONLY public.receitas ALTER COLUMN id SET DEFAULT nextval('public.receitas_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY rooms ALTER COLUMN id SET DEFAULT nextval('rooms_id_seq'::regclass);
+ALTER TABLE ONLY public.roles ALTER COLUMN id SET DEFAULT nextval('public.roles_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY trashes ALTER COLUMN id SET DEFAULT nextval('trashes_id_seq'::regclass);
+ALTER TABLE ONLY public.rooms ALTER COLUMN id SET DEFAULT nextval('public.rooms_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+ALTER TABLE ONLY public.trashes ALTER COLUMN id SET DEFAULT nextval('public.trashes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
 --
 -- Name: alimentos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY alimentos
+ALTER TABLE ONLY public.alimentos
     ADD CONSTRAINT alimentos_pkey PRIMARY KEY (id);
 
 
@@ -437,7 +481,7 @@ ALTER TABLE ONLY alimentos
 -- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY ar_internal_metadata
+ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
 
 
@@ -445,7 +489,7 @@ ALTER TABLE ONLY ar_internal_metadata
 -- Name: calendars_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY calendars
+ALTER TABLE ONLY public.calendars
     ADD CONSTRAINT calendars_pkey PRIMARY KEY (id);
 
 
@@ -453,15 +497,23 @@ ALTER TABLE ONLY calendars
 -- Name: courses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY courses
+ALTER TABLE ONLY public.courses
     ADD CONSTRAINT courses_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.notifications
+    ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
 
 
 --
 -- Name: receitas_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY receitas
+ALTER TABLE ONLY public.receitas
     ADD CONSTRAINT receitas_pkey PRIMARY KEY (id);
 
 
@@ -469,7 +521,7 @@ ALTER TABLE ONLY receitas
 -- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY roles
+ALTER TABLE ONLY public.roles
     ADD CONSTRAINT roles_pkey PRIMARY KEY (id);
 
 
@@ -477,7 +529,7 @@ ALTER TABLE ONLY roles
 -- Name: rooms_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY rooms
+ALTER TABLE ONLY public.rooms
     ADD CONSTRAINT rooms_pkey PRIMARY KEY (id);
 
 
@@ -485,7 +537,7 @@ ALTER TABLE ONLY rooms
 -- Name: schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY schema_migrations
+ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
 
 
@@ -493,7 +545,7 @@ ALTER TABLE ONLY schema_migrations
 -- Name: trashes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY trashes
+ALTER TABLE ONLY public.trashes
     ADD CONSTRAINT trashes_pkey PRIMARY KEY (id);
 
 
@@ -501,7 +553,7 @@ ALTER TABLE ONLY trashes
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY users
+ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
@@ -509,84 +561,84 @@ ALTER TABLE ONLY users
 -- Name: index_alimentos_on_informacaoNutricional; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX "index_alimentos_on_informacaoNutricional" ON alimentos USING gin ("informacaoNutricional");
+CREATE INDEX "index_alimentos_on_informacaoNutricional" ON public.alimentos USING gin ("informacaoNutricional");
 
 
 --
 -- Name: index_alimentos_on_marcadores; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_alimentos_on_marcadores ON alimentos USING gin (marcadores);
+CREATE INDEX index_alimentos_on_marcadores ON public.alimentos USING gin (marcadores);
 
 
 --
 -- Name: index_alimentos_on_nutrientes; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_alimentos_on_nutrientes ON alimentos USING gin (nutrientes);
+CREATE INDEX index_alimentos_on_nutrientes ON public.alimentos USING gin (nutrientes);
 
 
 --
 -- Name: index_alimentos_on_receitas; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_alimentos_on_receitas ON alimentos USING gin (receitas);
+CREATE INDEX index_alimentos_on_receitas ON public.alimentos USING gin (receitas);
 
 
 --
 -- Name: index_roles_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_roles_on_name ON roles USING btree (name);
+CREATE INDEX index_roles_on_name ON public.roles USING btree (name);
 
 
 --
 -- Name: index_roles_on_name_and_resource_type_and_resource_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_roles_on_name_and_resource_type_and_resource_id ON roles USING btree (name, resource_type, resource_id);
+CREATE INDEX index_roles_on_name_and_resource_type_and_resource_id ON public.roles USING btree (name, resource_type, resource_id);
 
 
 --
 -- Name: index_roles_on_resource_type_and_resource_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_roles_on_resource_type_and_resource_id ON roles USING btree (resource_type, resource_id);
+CREATE INDEX index_roles_on_resource_type_and_resource_id ON public.roles USING btree (resource_type, resource_id);
 
 
 --
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 
 
 --
 -- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
 
 
 --
 -- Name: index_users_roles_on_role_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_users_roles_on_role_id ON users_roles USING btree (role_id);
+CREATE INDEX index_users_roles_on_role_id ON public.users_roles USING btree (role_id);
 
 
 --
 -- Name: index_users_roles_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_users_roles_on_user_id ON users_roles USING btree (user_id);
+CREATE INDEX index_users_roles_on_user_id ON public.users_roles USING btree (user_id);
 
 
 --
 -- Name: index_users_roles_on_user_id_and_role_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_users_roles_on_user_id_and_role_id ON users_roles USING btree (user_id, role_id);
+CREATE INDEX index_users_roles_on_user_id_and_role_id ON public.users_roles USING btree (user_id, role_id);
 
 
 --
@@ -619,6 +671,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180308200620'),
 ('20180308202000'),
 ('20180312125917'),
-('20180313125614');
+('20180313125614'),
+('20180319203954'),
+('20180320011220'),
+('20180320012013'),
+('20180320214937');
 
 

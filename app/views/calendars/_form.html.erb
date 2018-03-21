@@ -2,16 +2,16 @@
 <% end %>
 <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title"><%= @calendar.is_holiday ? 'Adicionar feriado' : 'Definir Período letivo' %></h3>
+    <h3 class="box-title"><%= @calendar.is_holiday ? 'Adicionar data' : 'Definir Período letivo' %></h3>
   </div>
   <div class="box-body">
     <!-- Date -->
     <%= simple_form_for(@calendar) do |f| %>
         <%= f.error_notification %>
         <% if @calendar.is_holiday %>
-            <div class="form-group col-md-6">
-              <label>Data do feriado:</label>
-              <div class="input-group date">
+            <div class="form-group">
+              <label>Data:</label>
+              <div class="input-group date col-md-6">
                 <div class="input-group-addon">
                   <i class="fa fa-calendar"></i>
                 </div>
@@ -20,14 +20,27 @@
                 <%= f.input :is_holiday, id: :is_holiday, as: :hidden, value: true %>
               </div>
               <!-- /.input group -->
+              <br>
+              <label>
+                Selecione a(s) tabela(s):
+              </label>
+              <div class="input-group col-md-6 col-lg-6 col-xs-12 form-inline">
+                <%= f.input :trash, id: :trash, input_html: {class: 'minimal'} %>
+                &nbsp;
+                <%= f.input :food, id: :food, input_html: {class: 'minimal'} %>
+                &nbsp;
+                <%= f.input :kitchen, id: :kitchen, input_html: {class: 'minimal'} %>
+                &nbsp;
+                <%= f.input :fridge, id: :fridge, input_html: {class: 'minimal'} %>
+              </div>
             </div>
             <!-- /.form group -->
         <% else %>
             <!-- Date range -->
-            <div class="form-group col-md-6">
+            <div class="form-group">
               <label>Período letivo:</label>
 
-              <div class="input-group">
+              <div class="input-group col-md-6">
                 <div class="input-group-addon">
                   <i class="fa fa-calendar"></i>
                 </div>
@@ -41,7 +54,7 @@
         <% end %>
         <!-- /.form group -->
         <div class="form-actions col-xs-12">
-          <%= f.button :submit %>
+          <%= f.button :submit, id: 'save_date' %>
         </div>
     <% end %>
   </div>
