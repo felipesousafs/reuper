@@ -181,7 +181,6 @@ ALTER SEQUENCE public.courses_id_seq OWNED BY public.courses.id;
 CREATE TABLE public.notifications (
     id bigint NOT NULL,
     "from" integer,
-    task_type character varying,
     task_id integer,
     user_id integer,
     read boolean,
@@ -189,7 +188,8 @@ CREATE TABLE public.notifications (
     updated_at timestamp without time zone NOT NULL,
     subject character varying,
     table_type character varying,
-    description character varying
+    description character varying,
+    is_response boolean
 );
 
 
@@ -675,6 +675,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180319203954'),
 ('20180320011220'),
 ('20180320012013'),
-('20180320214937');
+('20180320214937'),
+('20180322130925');
 
 

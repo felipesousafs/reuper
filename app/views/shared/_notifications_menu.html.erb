@@ -5,9 +5,9 @@
   <ul class="menu">
     <% me.notifications.each do |notification| %>
         <li>
-          <a href="<%= notification_path(notification) %>">
+          <%= link_to notifications_path(q: notification.id) do  %>
             <i class="fa fa-<%=notification.table_type %> text-yellow"></i> <%= notification.subject %>
-          </a>
+          <% end %>
         </li>
     <% end %>
     <!--<li>-->

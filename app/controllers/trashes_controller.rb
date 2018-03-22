@@ -78,9 +78,11 @@ class TrashesController < ApplicationController
     id = params[:id]
     @trash = Trash.find(id)
     @user = current_user
+    @trash_user_id = @trash.user_id
+    @task_id = @trash.id
+    @from = @user.id
     @table_type = 'trash'
-    render new_notification_url
-    #@trash.send_trade_notification(@user.id, 'trash')
+    redirect_to '/notifications/new'
     # respond_to do |format|
     #   format.html {redirect_to home_tarefas_url, notice: 'Sua solicitação de troca foi enviada ao reseidente selecionado. Você será informado quando ele aceitar ou recusar a troca.'}
     #   format.json {head :no_content}

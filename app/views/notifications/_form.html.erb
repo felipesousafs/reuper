@@ -1,18 +1,55 @@
-<%= simple_form_for(@notification) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :from %>
-    <%= f.input :type %>
-    <%= f.input :subject %>
-    <%= f.input :task_type %>
-    <%= f.input :task_id %>
-    <%= f.input :user_id %>
-    <%= f.input :trash_id %>
-    <%= f.input :description %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+<% content_for :full_box do %>flag
 <% end %>
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h2 class="box-title">Enviar solicitação</h2>
+    <!-- /.box-tools -->
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <%= simple_form_for(@notification) do |f| %>
+        <%= f.error_notification %>
+
+        <div class="form-inputs">
+          <div class="row">
+            <div class="col-md-12">
+              <%= f.input :user_id, as: :hidden %>
+              <strong>Destinatário:</strong> <%= @notification.user.name %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <strong>Tabela:</strong> <%= t('activerecord.models.'+@notification.table_type) %>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+              <%= f.input :subject %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <%= f.input :table_type, as: :hidden %>
+              <%= f.input :task_id, as: :hidden %>
+              <%= f.input :from, as: :hidden %>
+              <%= f.input :read, as: :hidden %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <%= f.input :description, as: :text %>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <%= f.submit 'Enviar solicitação', class: 'btn btn-primary' ,data: {confirm: 'Tem certeza?'} %>
+        </div>
+    <% end %>
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /. box -->
+<%= console %>

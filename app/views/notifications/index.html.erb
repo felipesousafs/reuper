@@ -18,7 +18,7 @@
               <% if current_user.notifications.size > 0 %>
                   <span class="label label-primary pull-right"><%= current_user.notifications.size %></span>
               <% end %>
-              </a></li>
+            </a></li>
           <li><a href="#"><i class="fa fa-envelope-o"></i> Lidas</a></li>
           <li><a href="#"><i class="fa fa-file-text-o"></i> Todas</a></li>
           <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
@@ -55,7 +55,11 @@
   </div>
   <!-- /.col -->
   <div id="notifications-content" class="col-md-9">
-    <%= render 'list' %>
+    <% if params[:q] %>
+        <%= render 'notification', notification: @notification %>
+    <% else %>
+        <%= render 'list' %>
+    <% end %>
   </div>
   <!-- /.col -->
 </div>
@@ -64,6 +68,7 @@
     $(document).ready(function () {
         $('#notifications-index').click(function () {
             $('#notifications-content').html('<%= escape_javascript(render 'list') %>');
+            window.history.replaceState({}, document.title, "/notifications");
         });
     });
 </script>

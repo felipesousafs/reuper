@@ -39,6 +39,7 @@ pt-BR:
         role: Permissão
       notification:
         <<: *BASIC
+        subject: Assunto
         count:
           zero: Você não possui novas notificações
           one: Você possui 1 notificação não lida

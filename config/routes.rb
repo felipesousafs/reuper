@@ -25,7 +25,11 @@ Rails.application.routes.draw do
   # Swap tasks
 
   get '/trashes/swap/:id', to: 'trashes#swap_trash', as: 'swap_trash' # Swap trash
+  get '/notifications/send/:id/:table', to: 'notifications#new', as: 'send_notification'
   get '/notifications/:id', to: 'notifications#show', as: 'notification'
   get '/notifications', to: 'notifications#index', as: 'notifications'
-  get 'notifications/new', to: 'notifications#new', as: 'new_notification'
+  post '/notifications', to: 'notifications#create'
+  delete '/notifications', to: 'notifications#delete'
+  post '/notifications/response', to: 'notifications#notification_response'
+
 end

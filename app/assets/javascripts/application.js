@@ -171,7 +171,6 @@ $(document).ready(function () {
                     $("#popover-container .when").html(eventObj.quando);
                     $("#popover-container .user_room").html(eventObj.user_room);
                     $("#popover-container .url_swap_trash").attr('href', eventObj.url_swap_trash);
-                    $("#popover-container .url_swap_trash").attr('data-confirm', 'Tem certeza?');
                     return $("#popover-container").html();
                 },
                 trigger: 'click'
@@ -197,7 +196,7 @@ $(document).ready(function () {
                             title: $(this).attr('user'),
                             user_room: $(this).attr('user_room'),
                             allDay: true,
-                            url_swap_trash: "/trashes/swap/"+$(this).attr('id'),
+                            url_swap_trash: "/notifications/send/"+$(this).attr('id')+'/trash',
                             quando: $(this).attr('when'),
                             start: $(this).attr('when') // will be parsed
                         });
