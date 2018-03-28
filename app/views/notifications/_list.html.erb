@@ -27,7 +27,7 @@ REMEMBER!
            @contador = 0
         %>
         <tbody>
-        <% @notifications.each_with_index do |notification, i| %>
+        <% notifications.each_with_index do |notification, i| %>
             <% if notification.read %>
                 <tr class="notification_read">
             <% else %>
@@ -37,8 +37,11 @@ REMEMBER!
             <td><%= notification.sender.name %></td>
             <td><%= link_to notification.subject, notification, remote: true %></td>
             <td><%= t('activerecord.models.'+notification.table_type) %></td>
-            <td><%= link_to 'Ver detalhes', notification %>&nbsp;
-              <%= link_to 'Apagar', notification, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+            <td>
+              <%= link_to notification, method: :delete, data: { confirm: 'Tem certeza?', toggle: 'tooltip', placement: 'top', title: 'Apagar' } do %>
+                  <i class="fa fa-trash btn btn-danger text-center" title="Apagar notificação"></i>
+              <% end %>
+            </td>
             </tr>
             <%= hidden_field_tag(('notification_id'), notification.id) %>
 

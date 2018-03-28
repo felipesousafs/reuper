@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   get '/notifications/:id', to: 'notifications#show', as: 'notification'
   get '/notifications', to: 'notifications#index', as: 'notifications'
   post '/notifications', to: 'notifications#create'
-  delete '/notifications', to: 'notifications#delete'
+  delete '/notifications/:id', to: 'notifications#destroy'
   post '/notifications/response', to: 'notifications#notification_response'
 
 end

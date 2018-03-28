@@ -85,6 +85,15 @@ gem 'breadcrumbs_on_rails'
 
 gem 'font-awesome-sass'
 
+# Auditoria
+gem 'paranoia', '~> 2.2'
+gem 'paper_trail'
+
+# pdf
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary-edge'
+
 #temporary (get html content)
 require 'nokogiri'
 require 'open-uri'

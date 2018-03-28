@@ -1,4 +1,4 @@
-<div class="row">
+table<div class="row">
   <%= simple_form_for courses_path, method: "get" do |f| %>
       <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
         <%= f.input :pesquisa, input_html: {value: params[:pesquisa], name: 'pesquisa', placeholder: "Pesquise por nome", id: "pesquisa"}, label: false  %>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= csrf_meta_tags %>
+  <!-- For all other devices -->
+  <!-- Size should be 32 x 32 pixels -->
+  <%#= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+  <!-- Google Font -->
+  <style>
+    .content {
+      padding: 1px 1px 1px 1px;
+    }
+
+    .table {
+      border: 2px solid #000000;
+      border-top: none;
+    }
+    .row{
+      padding-top: 10px;
+      width: 100%;
+      position: relative;
+    }
+
+    .row:nth-child(odd) {
+      border-top: 2px solid #000000;
+      border-bottom: 1px solid #9c9c9c;
+      position: relative;
+    }
+
+    .row-element {
+      position: absolute;
+      right: 1%;
+      top: 0px;
+      width: 30%;
+      border-left: 2px solid #000;
+    }
+
+    .name {
+      width: 70%;
+    }
+    span{
+      padding: 10px 10px 0px 15px;
+    }
+    .header{
+      text-align: center;
+      border: 2px dotted #000;
+      margin-bottom: 20px;
+    }
+    h5{
+      border-top: 2px dotted #000;
+      padding-top: 20px;
+    }
+    .trash-img{
+      top: 1px;
+      right: 20px;
+      position: absolute;
+      float: right;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content" id="index">
+      <div class="header">
+        <h1>Tabela de Retirada do Lixo <div class="trash-img"><%= wicked_pdf_image_tag 'trash.png', width: 100, heigth: 100 %></div></h1>
+        <h5>Tarefa: descartar, no local adequado (depósito ao lado da parada de ônibus), o resíduo contido nas lixeiras da cozinha e área de serviço.</h5>
+      </div>
+      <div class="table">
+        <% @trashes.each_with_index do |trash, i| %>
+            <div class="row">
+              <span class="name"><%= trash.user.name %></span>
+              <span class="row-element"><%= l(trash.when) %></span>
+            </div>
+        <% end %>
+      </div>
+    </section>
+  </div>
+</div>
+</body>
+</html>

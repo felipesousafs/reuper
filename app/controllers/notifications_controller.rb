@@ -1,5 +1,6 @@
 class NotificationsController < ApplicationController
   before_action :set_notification, only: [:show, :destroy]
+  before_action :set_paper_trail_whodunnit
 
   def index
     @notifications = current_user.notifications
@@ -19,10 +20,15 @@ class NotificationsController < ApplicationController
     @notification.from = @user.id
     @notification.task_id = id
     @notification.read = false
+    @notification.is_response = false
     @notification.table_type = table
   end
 
   def show
+    if @notification.user_id == current_user.id
+      @notification.read = true
+      @notification.save
+    end
     respond_to do |format|
       format.html
       format.js
@@ -37,16 +43,21 @@ class NotificationsController < ApplicationController
         format.html {redirect_to home_tarefas_url, notice: 'Sua solicitação de troca foi enviada ao reseidente selecionado. Você será informado quando ele aceitar ou recusar a troca.'}
         format.json {head :no_content}
       else
-        format.html {}
+        format.html { redirect_to home_tarefas_url, alert: 'Não é permitido enviar mais de uma solicitação de troca para uma mesma tabela.' }
         format.json {render json: @notification.errors, status: :unprocessable_entity}
       end
     end
   end
 
   def destroy
+    unless @notification.is_response
+      task_id = @notification.task_id
+      @trash = Trash.find(task_id)
+      @trash.deny_request(@notification, false)
+    end
     @notification.destroy
     respond_to do |format|
-      format.html {redirect_to :back}
+      format.html {redirect_to notifications_path, notice: 'Notificação apagada com sucesso.'}
       format.json {head :no_content}
     end
   end

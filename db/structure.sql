@@ -120,7 +120,8 @@ CREATE TABLE public.calendars (
     trash boolean,
     food boolean,
     kitchen boolean,
-    fridge boolean
+    fridge boolean,
+    deleted_at timestamp without time zone
 );
 
 
@@ -183,13 +184,14 @@ CREATE TABLE public.notifications (
     "from" integer,
     task_id integer,
     user_id integer,
-    read boolean,
+    read boolean DEFAULT false,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     subject character varying,
     table_type character varying,
     description character varying,
-    is_response boolean
+    is_response boolean DEFAULT false,
+    deleted_at timestamp without time zone
 );
 
 
@@ -287,7 +289,8 @@ CREATE TABLE public.rooms (
     number character varying,
     floor character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    deleted_at timestamp without time zone
 );
 
 
@@ -329,7 +332,8 @@ CREATE TABLE public.trashes (
     user_id integer,
     done boolean,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    deleted_at timestamp without time zone
 );
 
 
@@ -407,6 +411,41 @@ CREATE TABLE public.users_roles (
 
 
 --
+-- Name: versions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.versions (
+    id bigint NOT NULL,
+    item_type character varying NOT NULL,
+    item_id integer NOT NULL,
+    event character varying NOT NULL,
+    whodunnit character varying,
+    object jsonb,
+    object_changes jsonb,
+    created_at timestamp without time zone
+);
+
+
+--
+-- Name: versions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.versions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: versions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.versions_id_seq OWNED BY public.versions.id;
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -467,6 +506,13 @@ ALTER TABLE ONLY public.trashes ALTER COLUMN id SET DEFAULT nextval('public.tras
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.versions ALTER COLUMN id SET DEFAULT nextval('public.versions_id_seq'::regclass);
 
 
 --
@@ -558,6 +604,14 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.versions
+    ADD CONSTRAINT versions_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: index_alimentos_on_informacaoNutricional; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -586,6 +640,20 @@ CREATE INDEX index_alimentos_on_receitas ON public.alimentos USING gin (receitas
 
 
 --
+-- Name: index_calendars_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_calendars_on_deleted_at ON public.calendars USING btree (deleted_at);
+
+
+--
+-- Name: index_notifications_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_notifications_on_deleted_at ON public.notifications USING btree (deleted_at);
+
+
+--
 -- Name: index_roles_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -604,6 +672,20 @@ CREATE INDEX index_roles_on_name_and_resource_type_and_resource_id ON public.rol
 --
 
 CREATE INDEX index_roles_on_resource_type_and_resource_id ON public.roles USING btree (resource_type, resource_id);
+
+
+--
+-- Name: index_rooms_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_rooms_on_deleted_at ON public.rooms USING btree (deleted_at);
+
+
+--
+-- Name: index_trashes_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_trashes_on_deleted_at ON public.trashes USING btree (deleted_at);
 
 
 --
@@ -642,6 +724,13 @@ CREATE INDEX index_users_roles_on_user_id_and_role_id ON public.users_roles USIN
 
 
 --
+-- Name: index_versions_on_item_type_and_item_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_versions_on_item_type_and_item_id ON public.versions USING btree (item_type, item_id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -676,6 +765,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180320011220'),
 ('20180320012013'),
 ('20180320214937'),
-('20180322130925');
+('20180322130925'),
+('20180324201840'),
+('20180324202415'),
+('20180327141605');
 
 

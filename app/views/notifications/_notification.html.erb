@@ -19,13 +19,18 @@
       <br>
     </div>
     <!-- /.mailbox-read-message -->
+
   </div>
   <!-- /.box-body -->
   <div class="box-footer">
-    <%= link_to notifications_response_path(id: @notification.id, resp: true), data: {confirm: 'Tem certeza?'}, class: 'btn btn-success', method: 'post' do %>
-        <i class="fa fa-trash-o"></i> Aceitar troca
+    <% unless @notification.is_response %>
+        <%= link_to notifications_response_path(id: @notification.id, resp: true), data: {confirm: 'Tem certeza?'}, class: 'btn btn-success', method: 'post' do %>
+            <i class="fa fa-check-square-o"></i> Aceitar troca
+        <% end %>
+        <%= link_to notifications_response_path(id: @notification.id, resp: false), data: {confirm: 'Tem certeza que deseja recusar?'}, class: 'btn btn-danger', method: 'post' do %>
+            <i class="fa fa-close"></i> Recusar proposta
+        <% end %>
     <% end %>
-    <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
   </div>
   <!-- /.box-footer -->
 </div>

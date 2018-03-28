@@ -1,9 +1,9 @@
 <% me = current_user %>
-<li class="header"><strong><%= t('activerecord.attributes.notification.count', count: me.notifications.count) %></strong></li>
+<li class="header"><strong><%= t('activerecord.attributes.notification.count', count: me.notifications.where(read: false).count) %></strong></li>
 <li>
   <!-- inner menu: contains the actual data -->
   <ul class="menu">
-    <% me.notifications.each do |notification| %>
+    <% me.notifications.where(read: false).each do |notification| %>
         <li>
           <%= link_to notifications_path(q: notification.id) do  %>
             <i class="fa fa-<%=notification.table_type %> text-yellow"></i> <%= notification.subject %>

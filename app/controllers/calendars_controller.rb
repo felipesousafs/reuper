@@ -1,5 +1,6 @@
 class CalendarsController < ApplicationController
   before_action :set_calendar, only: [:show, :edit, :update, :destroy]
+  before_action :set_paper_trail_whodunnit
 
   # GET /calendars
   # GET /calendars.json

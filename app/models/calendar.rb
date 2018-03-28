@@ -1,4 +1,7 @@
 class Calendar < ApplicationRecord
+  has_paper_trail
+  acts_as_paranoid
+
   def tables
     tables = []
     if self.trash

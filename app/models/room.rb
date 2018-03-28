@@ -1,5 +1,7 @@
 class Room < ApplicationRecord
   validates :number, :floor, presence: true
+  has_paper_trail
+  acts_as_paranoid
 
   has_many :users
 

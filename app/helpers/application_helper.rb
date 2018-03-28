@@ -19,4 +19,9 @@ module ApplicationHelper
       end
     end
   end
+
+  def sent_notifications
+    user = current_user
+    @notifications = Notification.where(from: user.id, is_response: false)
+  end
 end

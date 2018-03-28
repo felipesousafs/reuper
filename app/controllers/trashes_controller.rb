@@ -1,15 +1,31 @@
 class TrashesController < ApplicationController
   before_action :set_trash, only: [:show, :edit, :update, :destroy]
+  before_action :set_paper_trail_whodunnit
 
   # GET /trashes
   # GET /trashes.json
   def index
     @trashes = Trash.order(:when)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        @trashes = Trash.where(done: true).order(:when)
+        render template: 'trashes/index', pdf: 'Tabela_lixo-' + Time.now.strftime('%v %H:%M:%S').to_s, javascript_delay: 5000,
+               layout: 'trashes_pdf', disposition: 'inline'
+      end
+    end
   end
 
   # GET /trashes/1
   # GET /trashes/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render template: 'trashes/show', pdf: 'Tabela_lixo-' + Time.now.strftime('%v %H:%M:%S').to_s, javascript_delay: 10000,
+               layout: 'application', disposition: 'attachment'
+      end
+    end
   end
 
   # GET /trashes/new

@@ -2,6 +2,7 @@ class RoomsController < ApplicationController
   load_and_authorize_resource
   skip_authorize_resource :only => [:show, :index]
   before_action :set_room, only: [:show, :edit, :update, :destroy]
+  before_action :set_paper_trail_whodunnit
 
   # GET /rooms
   # GET /rooms.json

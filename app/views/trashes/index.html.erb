@@ -16,17 +16,17 @@
   <tbody>
   <% @trashes.each_with_index do |trash, i| %>
       <% if trash.done %>
-        <tr class="info">
+          <tr class="info">
       <% else %>
-        <tr>
+          <tr>
       <% end %>
-        <td><%= hidden_field_tag(('trash_id'), trash.id) %></td>
-        <td><%= l(trash.when) %></td>
-        <td><%= trash.user.name %></td>
-        <td><%= trash.done %></td>
-        <td><%= link_to 'Show', trash %>&nbsp;
-          <%= link_to 'Edit', edit_trash_path(trash) %>&nbsp;
-          <%= link_to 'Destroy', trash, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      <td><%= hidden_field_tag(('trash_id'), trash.id) %></td>
+      <td><%= l(trash.when) %></td>
+      <td><%= trash.user.name %></td>
+      <td><%= trash.done %></td>
+      <td><%= link_to 'Show', trash %>&nbsp;
+        <%= link_to 'Edit', edit_trash_path(trash) %>&nbsp;
+        <%= link_to 'Destroy', trash, method: :delete, data: {confirm: 'Are you sure?'} %></td>
       </tr>
 
       <%
@@ -38,7 +38,16 @@
   </tbody>
 </table>
 <br>
-
-<%= button_to 'Publicar tabela selecionada', {controller: 'trashes', action: 'pub_trash'}, id: :pub_trash_btn, class: 'btn btn-success', data: { prompt: 'Tem certeza que deseja publicar as tuplas selecionadas?' } %>
+<div class="box-footer">
+  <div class="col-xs-12 col-md-2">
+    <%= button_to 'Publicar tabela selecionada', {controller: 'trashes', action: 'pub_trash'}, id: :pub_trash_btn, class: 'btn btn-success', data: {prompt: 'Tem certeza que deseja publicar as tuplas selecionadas?'} %>&nbsp;
+  </div>
+  &nbsp;
+  <div class="col-xs-12 col-md-2">
+    <%= link_to trashes_path(format: :pdf), target: '_blank', title: 'Baixar itens marcados como publicado', class: 'btn label-default' do %>
+        <i class="fa fa-download" title="Baixar tabela PDF das tuplas publiadas"></i> Baixar como PDF
+    <% end %>
+  </div>
+</div>
 <br>
 <%= link_to 'New Trash', new_trash_path %>

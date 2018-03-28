@@ -31,7 +31,10 @@
 //= require icheck
 //= require daterangepicker
 //= require fullcalendar
-
+//= require vfs_fonts
+//= require jszip
+//= require buttons.html5
+//= require dataTables.buttons
 //= require_tree .
 
 $(document).ready(function () {
@@ -45,6 +48,12 @@ $(document).ready(function () {
     $('#datatable').dataTable({
         sPaginationType: "full_numbers",
         bJQueryUI: false,
+        dom: 'Bfrtip',
+        buttons: [
+            'pageLength',
+            'excelHtml5',
+            'pdfHtml5'
+        ],
         bProcessing: true
     });
     jQuery.extend(jQuery.fn.dataTableExt.oSort, {
@@ -67,6 +76,19 @@ $(document).ready(function () {
 
     $('#datatable-trashes').DataTable({
         sPaginationType: "full_numbers",
+        dom: 'Bfrtip',
+        buttons: [
+            'pageLength',
+            {
+                extend: 'excel',
+                text: 'Baixar como planilha do Excel',
+                exportOptions: {
+                    columns: [1, 2]
+                }
+
+            }
+
+        ],
         columnDefs: [
             {
                 orderable: false,
@@ -160,13 +182,13 @@ $(document).ready(function () {
             month: 'Mês',
             week: 'Semana',
             day: 'Dia'
-        },eventRender: function(eventObj, elm) {
+        }, eventRender: function (eventObj, elm) {
             elm.attr('style', 'cursor: pointer');
             elm.popover({
-                title: "<strong>"+eventObj.title+"</strong>",
+                title: "<strong>" + eventObj.title + "</strong>",
                 placement: 'top',
                 html: true,
-                content: function() {
+                content: function () {
                     $("#popover-container .title").html(eventObj.title);
                     $("#popover-container .when").html(eventObj.quando);
                     $("#popover-container .user_room").html(eventObj.user_room);
@@ -180,7 +202,7 @@ $(document).ready(function () {
             });
 
         },
-        events: function(start, end, timezone, callback) {
+        events: function (start, end, timezone, callback) {
             $.ajax({
                 url: 'tarefas.json',
                 dataType: 'json',
@@ -189,14 +211,14 @@ $(document).ready(function () {
                     start: start.unix(),
                     end: end.unix()
                 },
-                success: function(doc) {
+                success: function (doc) {
                     var events = [];
-                    $(doc).each(function() {
+                    $(doc).each(function () {
                         events.push({
                             title: $(this).attr('user'),
                             user_room: $(this).attr('user_room'),
                             allDay: true,
-                            url_swap_trash: "/notifications/send/"+$(this).attr('id')+'/trash',
+                            url_swap_trash: "/notifications/send/" + $(this).attr('id') + '/trash',
                             quando: $(this).attr('when'),
                             start: $(this).attr('when') // will be parsed
                         });
