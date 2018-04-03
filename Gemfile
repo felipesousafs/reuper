@@ -95,7 +95,6 @@ gem 'wkhtmltopdf-binary'
 gem 'wkhtmltopdf-binary-edge'
 
 #temporary (get html content)
-require 'nokogiri'
 require 'open-uri'
 
 gem 'rest-client', '~> 2.0', '>= 2.0.2'
