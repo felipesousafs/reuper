@@ -18,9 +18,10 @@ default: &default
   adapter: postgresql
   encoding: utf8
   pool: 5
-  host: localhost
-  username: postgres
-  password: 123456
+  database: dfvh152fkccfla
+  host: ec2-54-243-54-6.compute-1.amazonaws.com
+  username: dfvh152fkccfla
+  password: ac44c8c89c32db0cd1e61557b5497d121bc9a7998c19b1ff1a5110cc81debb15
 
 development:
   <<: *default
@@ -81,6 +82,6 @@ test:
 #
 production:
   <<: *default
-  database: reuper_production
-  username: reuper
+  database: dfvh152fkccfla
+  username: qxvxdtfyjklzfl
   password: <%= ENV['REUPER_DATABASE_PASSWORD'] %>
