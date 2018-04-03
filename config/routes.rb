@@ -31,5 +31,6 @@ Rails.application.routes.draw do
   post '/notifications', to: 'notifications#create'
   delete '/notifications/:id', to: 'notifications#destroy'
   post '/notifications/response', to: 'notifications#notification_response'
+  get '/gerar_tabela', to: 'trashes#generate_trash_table', as: 'generate_trash_table'
 
 end

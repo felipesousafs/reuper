@@ -39,15 +39,14 @@
 </table>
 <br>
 <div class="box-footer">
-  <div class="col-xs-12 col-md-2">
-    <%= button_to 'Publicar tabela selecionada', {controller: 'trashes', action: 'pub_trash'}, id: :pub_trash_btn, class: 'btn btn-success', data: {prompt: 'Tem certeza que deseja publicar as tuplas selecionadas?'} %>&nbsp;
-  </div>
-  &nbsp;
-  <div class="col-xs-12 col-md-2">
-    <%= link_to trashes_path(format: :pdf), target: '_blank', title: 'Baixar itens marcados como publicado', class: 'btn label-default' do %>
-        <i class="fa fa-download" title="Baixar tabela PDF das tuplas publiadas"></i> Baixar como PDF
+  <div>
+    <%= link_to 'Publicar tabela selecionada', {controller: 'trashes', action: 'pub_trash'}, id: :pub_trash_btn, class: 'margin btn btn-success col-xs-11 col-md-2', data: {prompt: 'Tem certeza que deseja publicar as tuplas selecionadas?'} %>&nbsp;&nbsp;
+    <%= link_to trashes_path(format: :pdf), target: '_blank', title: 'Baixar itens marcados como publicado', class: 'btn label-default col-xs-11 col-md-2 margin' do %>
+        <i class="fa fa-download"></i> Baixar como PDF
+    <% end %>
+    <%= link_to '/gerar_tabela', title: 'Gera a tabela em ordem alfabética (as tuplas publicadas não serão modificadas)', class: 'btn btn-flat btn-warning col-xs-11 col-md-2 pull-right margin' do %>
+        &nbsp;<i class="fa fa-refresh"></i>&nbsp; Gerar tabela&nbsp;
     <% end %>
   </div>
 </div>
 <br>
-<%= link_to 'New Trash', new_trash_path %>

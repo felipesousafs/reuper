@@ -9,7 +9,11 @@ class TrashesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        @trashes = Trash.where(done: true).order(:when)
+        today = Time.now.midnight
+        @trashes = Trash.where('trashes.when >= ?', today).where(done: true).order(:when)
+        if @trashes.size < 10
+          @trashes = Trash.where('trashes.when >= ?', today).order(:when).limit(10)
+        end
         render template: 'trashes/index', pdf: 'Tabela_lixo-' + Time.now.strftime('%v %H:%M:%S').to_s, javascript_delay: 5000,
                layout: 'trashes_pdf', disposition: 'inline'
       end
@@ -103,6 +107,12 @@ class TrashesController < ApplicationController
     #   format.html {redirect_to home_tarefas_url, notice: 'Sua solicitação de troca foi enviada ao reseidente selecionado. Você será informado quando ele aceitar ou recusar a troca.'}
     #   format.json {head :no_content}
     # end
+  end
+
+  def generate_trash_table
+    respond_to do |format|
+        format.html {redirect_to trashes_path, notice: 'Tabela atualizada.'}
+    end
   end
 
   private
