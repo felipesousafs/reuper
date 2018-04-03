@@ -8,12 +8,12 @@
 
 #Room - Destroy and Create
 # Room.destroy_all
-# 16.times do |index|
-#   Room.create!(number: index+1, floor: 'Térreo')
-# end
-# 16.times do |index|
-#   Room.create!(number: index+1, floor: 'Piso Superior')
-# end
+16.times do |index|
+  Room.create!(number: index+1, floor: 'Térreo')
+end
+16.times do |index|
+  Room.create!(number: index+1, floor: 'Piso Superior')
+end
 #
 # #Course - Destroy and Create
 # Course.destroy_all
@@ -22,17 +22,17 @@
 # end
 
 # Create 100 users
-room = 41
-25.times do
-  4.times do
-    User.create!(
-        email: Faker::Internet.unique.email,
-        password: Faker::Internet.password(8, 16),
-        name: Faker::Name.name,
-        reg_number: Faker::Number.number(9),
-        course_id: Faker::Number.between(21, 40),
-        room_id: room
-    )
-  end
-  room = room + 1
-end
+# room = 41
+# 25.times do
+#   4.times do
+#     User.create!(
+#         email: Faker::Internet.unique.email,
+#         password: Faker::Internet.password(8, 16),
+#         name: Faker::Name.name,
+#         reg_number: Faker::Number.number(9),
+#         course_id: Faker::Number.between(21, 40),
+#         room_id: room
+#     )
+#   end
+#   room = room + 1
+# end
